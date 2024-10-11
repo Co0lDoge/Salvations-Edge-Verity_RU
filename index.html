@@ -103,15 +103,24 @@
         this.outsideGuardianMiddle = '';
         this.outsideGuardianRight = '';
       },
+      getShape: function(char) {
+        switch(char) {
+            case '0': return 'Круг';
+            case '3': return 'Треугольник';
+            case '4': return 'Квадрат';
+            default: return ''; // Handle any other characters
+        }
+      },
+    
 
       setInsideCallouts: function() {
         if(this.insideCallouts.length === 3) {
           let leftChar = this.insideCallouts[0].toLowerCase();
           let middleChar = this.insideCallouts[1].toLowerCase();
           let rightChar = this.insideCallouts[2].toLowerCase();
-          this.insideGuardianLeft = this.twoD.find(item => item[0].toLowerCase() === leftChar);
-          this.insideGuardianMiddle = this.twoD.find(item => item[0].toLowerCase() === middleChar);
-          this.insideGuardianRight = this.twoD.find(item => item[0].toLowerCase() === rightChar);
+          this.insideGuardianLeft = this.getShape(leftChar);
+          this.insideGuardianMiddle = this.getShape(middleChar);
+          this.insideGuardianRight = this.getShape(rightChar);
         }
       },
 
@@ -325,6 +334,9 @@
                 <div class="input-group flex flex-col">
                     <label class="whitespace-nowrap font-bold" for="nameField"
                         >Внутренние Формы</label
+                    >
+                    <div
+                        >*Цифры соответствуют количеству углов в фигуре, например 3 для треугольника</div
                     >
                     <input
                         class="p-2 border-2 border-gray-300 rounded-md"
@@ -607,7 +619,7 @@
                             ></span>
                         </div>
                     </div>
-                    <div class="font-bold text-lg">Steps</div>
+                    <div class="font-bold text-lg">Шаги</div>
                     <dtv>
                         <span x-html="displayNeededSteps(neededSwaps())"></span>
                     </dtv>
