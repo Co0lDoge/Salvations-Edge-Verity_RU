@@ -3,4 +3,4 @@ Link to site: [Link](Salvations-Edge-Verity_RU)
 
 | Preview |
 |:----------:|
-| <img src="https://github.com/user-attachments/assets/86bf5358-18f3-40f6-8402-47e31dc5de24" height="600" /> |
+| <img src="https://github.com/user-attachments/assets/022b58f3-d397-4e90-91ab-f73867d78959" height="600" /> |
