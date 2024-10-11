@@ -74,9 +74,9 @@
       ],
       // map of inside shapes to the corresponding outside shape that guardian must be holding to exit inside rooms
       solutions: {
-        Круг: 'Prism',
-        Квадрат: 'Cone',
-        Треугольник: 'Cylinder',
+        Круг: 'Призма',
+        Квадрат: 'Конус',
+        Треугольник: 'Цилиндр',
       },
       threeD: [
         {name: 'Куб', symbol1: 'Квадрат', symbol2: 'Квадрат', isPure: true, image: './images/cube.svg', raw: ''},
@@ -122,14 +122,14 @@
       },
 
       clickInsidePicture(guardian, imageUrlName){
-            if(guardian === 'left'){
+            if(guardian === 'лево'){
                 this.insideGuardianLeft = imageUrlName;
                 
             } 
-            if(guardian === 'middle'){
+            if(guardian === 'центр'){
                 this.insideGuardianMiddle = imageUrlName;
             } 
-            if(guardian === 'right'){
+            if(guardian === 'право'){
                 this.insideGuardianRight = imageUrlName;
             }
             //if two are selected, auto select third
@@ -214,21 +214,21 @@
                     // * there is only one other shape out of place, and we should swap with it
                     if (neededSwaps.middle.length == 2) {
                         toFind = neededSwaps.middle.pop();
-                        steps.push([toSwap, 'left', toFind, 'middle']);
+                        steps.push([toSwap, 'лево', toFind, 'центр']);
                     } else if (neededSwaps.right.length == 2) {
                         toFind = neededSwaps.right.pop();
-                        steps.push([toSwap, 'left', toFind, 'right']);
+                        steps.push([toSwap, 'лево', toFind, 'право']);
                     } else if (neededSwaps.middle.length == 1) {
                         // it's possible that we're handling 'all outside aisles must swap one' e.g. SCT/Cylinder+Cone+Prism
                         // we've popped left, pop middle and see if right needs one swap. if so, we'll actually need to swap the retrieved symbol again.
                         toFind = neededSwaps.middle.pop();
-                        steps.push([toSwap, 'left', toFind, 'middle']);
+                        steps.push([toSwap, 'лево', toFind, 'центр']);
                         if (neededSwaps.left.length === 0 && neededSwaps.middle.length === 0 && neededSwaps.right.length == 1) {
                             neededSwaps.left.push(toFind);
                         }
                     } else if (neededSwaps.right.length == 1) {
                         toFind = neededSwaps.right.pop();
-                        steps.push([toSwap, 'left', toFind, 'right']);
+                        steps.push([toSwap, 'лево', toFind, 'право']);
                     } else {
                         console.log('wanted to swap ' + toSwap + ' from left, but couldnt ??');
                         steps.push([undefined, undefined, undefined, undefined]);
@@ -238,7 +238,7 @@
                     toSwap = neededSwaps.middle.pop();
                     if (neededSwaps.right.length) {
                         toFind = neededSwaps.right.pop();
-                        steps.push([toSwap, 'middle', toFind, 'right']);
+                        steps.push([toSwap, 'центр', toFind, 'право']);
                     } else {
                         console.log('wanted to swap ' + toSwap + ' from middle, couldnt put it at right?? left should have taken this otherwise??');
                         steps.push([undefined, undefined, undefined, undefined]);
@@ -252,7 +252,7 @@
                     // break the tie, at which point the loop can converge.
                     toSwap = neededSwaps.middle.pop();
                     toFind = neededSwaps.right.pop();
-                    steps.push([toSwap, 'middle', toFind, 'right']);
+                    steps.push([toSwap, 'центр', toFind, 'право']);
                 }
             }
 
@@ -260,7 +260,7 @@
 
             for (i = 0; i < steps.length; i++) {
                 if (steps[i].indexOf(undefined) >= 0) {
-                    return 'Unable to solve: inside or outside calls might be wrong';
+                    return 'Невозможно решить: внутренние или внешние формы ошибочны';
                 }
                 step_strings.push(''.concat(i + 1, '. Положите ', steps[i][0], ' на <b>', steps[i][1], '</b> и ', steps[i][2], ' на <b>', steps[i][3], '</b>'));
             }
@@ -329,7 +329,7 @@
                     <input
                         class="p-2 border-2 border-gray-300 rounded-md"
                         type="text"
-                        placeholder="CST"
+                        placeholder="403"
                         id="nameField"
                         x-model="insideCallouts"
                         x-on:keyup="setInsideCallouts()"
@@ -346,7 +346,7 @@
                                     <div
                                         class="h-12 w-12 p-2 cursor-pointer img-bg items-center justify-center"
                                         x-bind:class="insideGuardianLeft === imageUrl.name ? 'border-2 border-blue-800 p-1 bg-gray-300' : 'border-2 border-gray-300 p-1 border-dark'"
-                                        x-on:click="clickInsidePicture('left', imageUrl.name)"
+                                        x-on:click="clickInsidePicture('лево', imageUrl.name)"
                                     >
                                         <div
                                             class="w-full h-full"
@@ -384,7 +384,7 @@
                                     <div
                                         class="h-12 w-12 p-2 cursor-pointer img-bg items-center justify-center"
                                         x-bind:class="insideGuardianMiddle === imageUrl.name ? 'border-2 border-blue-800 p-1 bg-gray-300' : 'border-2 border-gray-300 p-1 border-dark'"
-                                        x-on:click="clickInsidePicture('middle', imageUrl.name)"
+                                        x-on:click="clickInsidePicture('центр', imageUrl.name)"
                                     >
                                         <div
                                             x-html="imageUrl.raw"
@@ -422,7 +422,7 @@
                                     <div
                                         class="h-12 w-12 p-2 cursor-pointer img-bg items-center justify-center"
                                         x-bind:class="insideGuardianRight === imageUrl.name ? 'border-2 border-blue-800 p-1 bg-gray-300' : 'border-2 border-gray-300 p-1 border-dark'"
-                                        x-on:click="clickInsidePicture('right', imageUrl.name)"
+                                        x-on:click="clickInsidePicture('право', imageUrl.name)"
                                     >
                                         <div
                                             x-html="imageUrl.raw"
