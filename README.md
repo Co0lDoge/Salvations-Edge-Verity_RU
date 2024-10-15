@@ -1,5 +1,5 @@
 # Shapes calculator for Verity (russian version)
-Link to site: [Link](Salvations-Edge-Verity_RU)
+Link to site: [Link](https://co0ldoge.github.io/Salvations-Edge-Verity_RU/)
 
 | Preview |
 |:----------:|
